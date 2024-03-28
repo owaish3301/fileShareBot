@@ -164,10 +164,7 @@ async def subscribers(msg: types.message) -> None:
     except Exception as e:
         print(f"An error occurred: {str(e)}")
 
-@router.message(Command("ngrokLink"), F.from_user.id.in_(ADMIN_IDS))
-async def ngrokLink(msg: types.message) -> None:
-    public_url = ngrok.connect(5000)  # The port number should be the same as the one your Flask app is using
-    await msg.answer(f"Public URL: {public_url}")
+
 
 # Save the video
 @router.message(F.from_user.id.in_(ADMIN_IDS), F.video)
