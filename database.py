@@ -1,6 +1,8 @@
 from pymongo import MongoClient
 from config import mongodbUrl
 
+
+print(mongodbUrl)
 client = MongoClient(mongodbUrl)
 db = client['users']
  
