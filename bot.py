@@ -6,9 +6,10 @@ from aiogram.filters import Command
 from aiogram import Router
 from aiogram import types
 from aiogram import F
+import threading
+from pyngrok import ngrok
 
-
-
+ 
 #custom imports
 from config import TOKEN, ADMIN_IDS, bot_username, force_sub_channel_id, tutorialVideoId
 from getVideo import getVideo
@@ -22,6 +23,7 @@ from inlineKeyboards import unauthenicated_users_inline_keyboard, force_sub_inli
 from shortendLink import short_url
 from deauthenticate_users import update_deauth_time, deauthenticate_user
 from broadcast import broadcast_message
+from downloadFiles import app
 
 
 
@@ -162,6 +164,11 @@ async def subscribers(msg: types.message) -> None:
     except Exception as e:
         print(f"An error occurred: {str(e)}")
 
+@router.message(Command("ngrokLink"), F.from_user.id.in_(ADMIN_IDS))
+async def ngrokLink(msg: types.message) -> None:
+    public_url = ngrok.connect(5000)  # The port number should be the same as the one your Flask app is using
+    await msg.answer(f"Public URL: {public_url}")
+
 # Save the video
 @router.message(F.from_user.id.in_(ADMIN_IDS), F.video)
 async def saveVideo(msg: types.video) -> None:
@@ -212,8 +219,14 @@ async def main() -> None:
     dp.include_router(router) 
     await dp.start_polling(bot)
 
-
+def run_flask():
+    public_url = ngrok.connect(5000)  # The port number should be the same as the one your Flask app is using
+    print('Public URL:', public_url)
+    app.run()
+    
 
 print('bot started...')
 if __name__ == '__main__':
+    t = threading.Thread(target=run_flask)
+    t.start()
     asyncio.run(main())
