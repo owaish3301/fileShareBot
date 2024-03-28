@@ -1,6 +1,7 @@
 from pymongo import MongoClient
+from config import mongodbUrl
 
-client = MongoClient('mongodb+srv://shadow:xshadow@filesharebot.s8qpy.mongodb.net/?retryWrites=true&w=majority&appName=fileShareBot')
+client = MongoClient(mongodbUrl)
 db = client['users']
  
 # SQLite3 database helper
