@@ -114,7 +114,7 @@ async def start_function(msg: types.message) -> None:
                 await notMember(msg,name)
                 
         except Exception as e:
-            print(f"An error occurred: {str(e)}")
+            print(f"An error occurred in the start function: {str(e)}")
             
     else:
         # Send the welcome message when the user sends /start command without any argument

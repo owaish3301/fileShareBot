@@ -26,4 +26,4 @@ def add_video_to_database(unique_id, video_id, caption):
         # Insert the video data into the collection
         collection.insert_one(video_data)
     except Exception as e:
-        print(f"An error occurred: {e}")
+        print(f"An error occurred while adding video to database: {e}")
