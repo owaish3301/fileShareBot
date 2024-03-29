@@ -15,7 +15,7 @@ from config import TOKEN, ADMIN_IDS, bot_username, force_sub_channel_id, tutoria
 from getVideo import getVideo
 from argumentGenerator import generate_unique_id
 from sendVideo import sendVideo
-from add_videos_to_json import add_video_to_json
+from add_videos_to_database import add_video_to_database
 from database import DBHelper
 from sessionAuthenticator import sessionAuthenticator
 from generateAuthKey import generateAuthKey, setAuthKey_to_Null
@@ -181,7 +181,7 @@ async def saveVideo(msg: types.video) -> None:
             unique_id = generate_unique_id() 
 
             # Add the video to the json file
-            add_video_to_json(unique_id, video_id, caption)
+            add_video_to_database(unique_id, video_id, caption)
             await msg.answer("video saved successfully")
             
             await bot.send_video(chat_id=msg.chat.id, video= video_id, caption=f"https://t.me/{bot_username}?start={unique_id}")

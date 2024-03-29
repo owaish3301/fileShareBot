@@ -1,5 +1,5 @@
 from pymongo import MongoClient
-from config import mongodbUrl
+from config import mongodbUrl,counter
 
 client = MongoClient(mongodbUrl)
 db = client['users']
@@ -23,7 +23,7 @@ class DBHelper:
                 "user_id": user_id,
                 "username": username,
                 "first_name": first_name,
-                "counter": -5,
+                "counter": counter,  
                 "authenticated": False,
                 "auth_key": None,
                 "deauthentication_time": None
