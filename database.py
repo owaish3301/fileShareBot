@@ -23,7 +23,7 @@ class DBHelper:
                 "user_id": user_id,
                 "username": username,
                 "first_name": first_name,
-                "counter": 0,
+                "counter": -5,
                 "authenticated": False,
                 "auth_key": None,
                 "deauthentication_time": None
