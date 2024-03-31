@@ -6,8 +6,6 @@ from aiogram.filters import Command
 from aiogram import Router
 from aiogram import types
 from aiogram import F
-import threading
-from pyngrok import ngrok
 
  
 #custom imports
@@ -23,7 +21,7 @@ from inlineKeyboards import unauthenicated_users_inline_keyboard, force_sub_inli
 from shortendLink import short_url
 from deauthenticate_users import update_deauth_time, deauthenticate_user
 from broadcast import broadcast_message
-from downloadFiles import app
+
 
 
 
@@ -216,14 +214,8 @@ async def main() -> None:
     dp.include_router(router) 
     await dp.start_polling(bot)
 
-def run_flask():
-    public_url = ngrok.connect(5000)  # The port number should be the same as the one your Flask app is using
-    print('Public URL:', public_url)
-    app.run()
-    
+
 
 print('bot started...')
 if __name__ == '__main__':
-    t = threading.Thread(target=run_flask)
-    t.start()
     asyncio.run(main())
