@@ -184,7 +184,7 @@ async def saveVideo(msg: types.video) -> None:
             
             #await bot.send_video(chat_id=msg.chat.id, video= video_id, caption=f"https://t.me/{bot_username}?start={unique_id}")
             # Send the link to the user
-            await msg.answer( f"Link: https://t.me/{bot_username}?start={unique_id}")
+            await msg.answer( f"https://t.me/{bot_username}?start={unique_id}")
         else:
             await msg.answer("send /genLink to generate a link")   
     except Exception as e:
